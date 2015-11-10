@@ -1,0 +1,19 @@
+body{
+	background: #eee;
+	position: relative;
+}
+
+.panel-analytic{
+	background-color: white;
+}
+
+h2{
+	color: orange;
+}
+
+.login{
+	width: 370px;
+	margin: 0 auto;
+	margin-top: 120px;
+	box-shadow: 2px 2px  10px rgba(0, 0, 0, 0.5);
+}
