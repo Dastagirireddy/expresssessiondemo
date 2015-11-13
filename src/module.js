@@ -13,6 +13,12 @@ app.config(function($stateProvider, $urlRouterProvider){
 			templateUrl: '../dashboard.html',
 			authorization: true,
 			controller: 'DashboardController'
+		})
+		.state('users', {
+			url: '/users',
+			templateUrl: '../users.html',
+			authorization: true,
+			controller: 'UserController'
 		});
 
 	$urlRouterProvider.otherwise('/login');
@@ -21,9 +27,17 @@ app.config(function($stateProvider, $urlRouterProvider){
 app.config(function($httpProvider){
 
 	$httpProvider.interceptors.push('TimeInterceptor');
+	//$httpProvider.interceptors.push('SessionInterceptor');
 });
 
 app.run(function($rootScope, $state, LoginService, LoginFactory){
+
+	LoginFactory.getSession().then(function(data){
+
+		LoginService.isLoggedIn = true;
+		LoginService.setCurrentUser(data);
+		$state.go('dashboard');
+	});
 
 	$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
 
@@ -36,12 +50,5 @@ app.run(function($rootScope, $state, LoginService, LoginFactory){
 			event.preventDefault();
 			$state.go('dashboard');
 		}
-	});
-
-	LoginFactory.getSession().then(function(data){
-
-		LoginService.isLoggedIn = true;
-		LoginService.setCurrentUser(data);
-		$state.go('dashboard');
 	});
 });

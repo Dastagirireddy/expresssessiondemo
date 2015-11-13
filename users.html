@@ -1,0 +1,47 @@
+<div class="dashboard">
+  <div class="container">
+    <div class="header clearfix">
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <li role="presentation" ui-sref-active="active"><a href="javascript:void(0);" ui-sref="dashboard">Home</a></li>
+          <li role="presentation" ui-sref-active="active"><a href="javascript:void(0);" ui-sref="users">Users</a></li>
+          <li role="presentation" ui-sref-active="active"><a href="javascript:void(0);" ui-sref="docs">Docs</a></li>
+          <li><button class="btn btn-danger" data-ng-click="logout()">Logout</button></li>
+        </ul>
+      </nav>
+      <h3 class="text-muted">Project name</h3>
+    </div>
+
+    <div>
+
+      <div class="form-group">
+        <button class="btn btn-danger" data-ng-click="Prev()" ng-disabled="pager.start == 0">Previous</button>
+        <button class="btn btn-danger" data-ng-click="Next()" ng-disabled="pager.end == users.length">Next</button>
+      </div>
+
+      <table class="table table-bordered table-striped">
+        <tr ng-repeat="user in users | slice:pager.start:pager.end">
+          <td class="text-center">{{ user }}</td>
+        </tr>
+      </table>
+
+      <nav class="text-center">
+            
+            <ul class="pagination">
+              <li><a href="javascript:void(0);" aria-label="Previous" data-ng-click="Prev()" ng-class="disabled('prev')"><span aria-hidden="true">«</span></a></li>
+              <li ng-repeat="page in pages" ng-class="activatePage($index)">
+                  <a href="#">{{ page }}</a>
+              </li>
+              <li><a href="javascript:void(0);" aria-label="Next" data-ng-click="Next()" ng-class="disabled('next')"><span aria-hidden="true">»</span></a></li>
+           </ul>
+           
+         </nav>
+
+    </div>
+
+    <footer class="footer">
+      <p>© Company 2014</p>
+    </footer>
+
+  </div>
+</div>
